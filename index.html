@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WebCraft Academy</title>
+
+<style>
+
+/* =========================
+   BASIC SETTINGS
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+:root{
+    --bg:#07111f;
+    --card:#101f34;
+    --card2:#142741;
+    --text:#f2f7ff;
+    --muted:#9fb2c9;
+    --blue:#42a5ff;
+    --cyan:#22d3ee;
+    --purple:#9b7cff;
+    --green:#36e29b;
+    --border:rgba(255,255,255,.1);
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+    radial-gradient(circle at 10% 10%,rgba(66,165,255,.13),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(155,124,255,.12),transparent 30%),
+    var(--bg);
+    color:var(--text);
+    line-height:1.6;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font-family:inherit;
+}
+
+.container{
+    width:min(1150px,92%);
+    margin:auto;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:rgba(7,17,31,.85);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:900;
+}
+
+.logo span{
+    color:var(--cyan);
+}
+
+.nav-links{
+    display:flex;
+    gap:22px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:#b9c9db;
+    font-size:14px;
+    transition:.2s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.menu-btn{
+    display:none;
+    background:none;
+    border:0;
+    color:white;
+    font-size:26px;
+    cursor:pointer;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:120px 0 70px;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:50px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 14px;
+    border-radius:30px;
+    color:var(--cyan);
+    background:rgba(34,211,238,.08);
+    border:1px solid rgba(34,211,238,.25);
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(42px,6vw,70px);
+    line-height:1.05;
+    letter-spacing:-3px;
+    margin-bottom:20px;
+}
+
+.gradient{
+    background:linear-gradient(
+        90deg,
+        var(--cyan),
+        var(--blue),
+        var(--purple)
+    );
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:18px;
+    max-width:650px;
+    margin-bottom:28px;
+}
+
+.buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    padding:13px 20px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.primary{
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        var(--purple)
+    );
+    color:white;
+}
+
+.secondary{
+    background:#14243a;
+    border:1px solid var(--border);
+    color:white;
+}
+
+/* =========================
+   CODE WINDOW
+========================= */
+
+.code-window{
+    background:#091321;
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 25px 70px rgba(0,0,0,.35);
+}
+
+.window-top{
+    padding:13px 16px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    gap:7px;
+    align-items:center;
+}
+
+.dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:#526277;
+}
+
+.window-title{
+    margin-left:8px;
+    color:#8294aa;
+    font-size:12px;
+}
+
+pre{
+    padding:22px;
+    overflow:auto;
+    color:#d9e8f7;
+    font-family:Consolas,monospace;
+    font-size:13px;
+}
+
+.tag{
+    color:#ff7aa8;
+}
+
+.comment{
+    color:#667990;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+    padding:90px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-title small{
+    color:var(--cyan);
+    font-weight:bold;
+}
+
+.section-title h2{
+    font-size:40px;
+    margin:8px 0 12px;
+}
+
+.section-title p{
+    color:var(--muted);
+    max-width:650px;
+    margin:auto;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    background:linear-gradient(
+        145deg,
+        var(--card),
+        rgba(16,31,52,.65)
+    );
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:27px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(66,165,255,.3);
+}
+
+.icon{
+    width:55px;
+    height:55px;
+    display:grid;
+    place-items:center;
+    border-radius:15px;
+    font-size:25px;
+    margin-bottom:17px;
+    background:rgba(66,165,255,.12);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.card p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+.card ul{
+    padding-left:18px;
+    color:var(--muted);
+    margin-top:15px;
+}
+
+.card li{
+    margin:6px 0;
+}
+
+/* =========================
+   EXAMPLES
+========================= */
+
+.example{
+    margin-top:18px;
+    background:#08121f;
+    border:1px solid var(--border);
+    border-radius:13px;
+    overflow:hidden;
+}
+
+.example-head{
+    padding:10px 14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid var(--border);
+    color:#8ea2ba;
+    font-size:12px;
+}
+
+.copy{
+    background:#182b45;
+    color:white;
+    border:0;
+    border-radius:7px;
+    padding:5px 9px;
+    cursor:pointer;
+}
+
+.copy:hover{
+    background:#24415f;
+}
+
+/* =========================
+   STEPS
+========================= */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.step{
+    padding:25px;
+    border:1px solid var(--border);
+    border-radius:17px;
+    background:rgba(16,31,52,.65);
+}
+
+.number{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        var(--purple)
+    );
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+/* =========================
+   FILE GUIDE
+========================= */
+
+.file-box{
+    max-width:900px;
+    margin:auto;
+}
+
+.file-highlight{
+    margin-top:25px;
+    padding:20px;
+    border-radius:14px;
+    background:rgba(54,226,155,.07);
+    border:1px solid rgba(54,226,155,.22);
+}
+
+.file-highlight strong{
+    color:var(--green);
+}
+
+.connection{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-top:20px;
+}
+
+/* =========================
+   PROMPTS
+========================= */
+
+.search-box{
+    max-width:750px;
+    margin:0 auto 30px;
+}
+
+.search{
+    width:100%;
+    padding:14px 16px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:#0c192b;
+    color:white;
+    outline:none;
+}
+
+.prompt-list{
+    display:grid;
+    gap:16px;
+}
+
+.prompt-card{
+    background:#0e1c30;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+}
+
+.prompt-top{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    align-items:center;
+}
+
+.prompt-text{
+    color:#bdcce0;
+    margin-top:12px;
+    background:#081321;
+    border-radius:10px;
+    padding:15px;
+    font-family:Consolas,monospace;
+    font-size:13px;
+}
+
+/* =========================
+   SLIDES
+========================= */
+
+.slide-area{
+    max-width:900px;
+    margin:auto;
+}
+
+.slide{
+    min-height:420px;
+    display:none;
+    padding:50px;
+    border-radius:25px;
+    background:
+    radial-gradient(
+        circle at 80% 20%,
+        rgba(66,165,255,.16),
+        transparent 30%
+    ),
+    linear-gradient(135deg,#101f35,#0a1525);
+    border:1px solid var(--border);
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.slide.active{
+    display:flex;
+}
+
+.slide h3{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.slide p{
+    color:var(--muted);
+    max-width:650px;
+    margin:auto;
+}
+
+.slide-controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    margin-top:20px;
+}
+
+.slide-number{
+    color:var(--muted);
+}
+
+/* =========================
+   CHEAT SHEET
+========================= */
+
+.cheat{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.cheat-box{
+    padding:25px;
+    border:1px solid var(--border);
+    background:#0e1c30;
+    border-radius:18px;
+}
+
+.command{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px;
+    margin:8px 0;
+    border-radius:10px;
+    background:#081421;
+    font-family:Consolas,monospace;
+    font-size:13px;
+}
+
+.command span{
+    color:var(--muted);
+    font-family:Arial;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    padding:45px 0;
+    text-align:center;
+    border-top:1px solid var(--border);
+    color:#71849b;
+}
+
+footer strong{
+    color:white;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        padding:20px;
+        background:#081321;
+        flex-direction:column;
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .steps{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .connection{
+        grid-template-columns:1fr;
+    }
+
+    .cheat{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:520px){
+
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .slide{
+        min-height:380px;
+        padding:30px 20px;
+    }
+
+    .slide h3{
+        font-size:32px;
+    }
+
+    .prompt-top{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav>
+
+<div class="container nav-inner">
+
+<a href="#home" class="logo">
+    Web<span>Craft</span>
+</a>
+
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+<ul class="nav-links" id="navLinks">
+
+<li><a href="#languages">Languages</a></li>
+
+<li><a href="#save">Save</a></li>
+
+<li><a href="#files">Files</a></li>
+
+<li><a href="#prompts">Prompts</a></li>
+
+<li><a href="#slides">Slides</a></li>
+
+<li><a href="#cheatsheet">Cheat Sheet</a></li>
+
+</ul>
+
+</div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+<div class="container hero-grid">
+
+<div>
+
+<span class="badge">
+WEB DEVELOPMENT • BEGINNER GUIDE
+</span>
+
+<h1>
+Learn to build
+<span class="gradient">
+professional websites.
+</span>
+</h1>
+
+<p>
+Learn HTML, CSS and JavaScript, how to save your
+files, how to organize your project, and how to use
+ChatGPT to create professional websites and slides.
+</p>
+
+<div class="buttons">
+
+<a href="#languages" class="btn primary">
+Start Learning
+</a>
+
+<a href="#prompts" class="btn secondary">
+ChatGPT Prompts
+</a>
+
+</div>
+
+</div>
+
+
+<div class="code-window">
+
+<div class="window-top">
+
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+
+<span class="window-title">
+index.html
+</span>
+
+</div>
+
+<pre><span class="comment">&lt;!-- My First Website --&gt;</span>
+
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+
+<span class="tag">&lt;html&gt;</span>
+
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;title&gt;</span>
+        My Website
+    <span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;h1&gt;</span>
+        Hello World!
+    <span class="tag">&lt;/h1&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+
+<span class="tag">&lt;/html&gt;</span></pre>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     HTML CSS JS
+========================= -->
+
+<section id="languages">
+
+<div class="container">
+
+<div class="section-title">
+
+<small>THE 3 CORE TECHNOLOGIES</small>
+
+<h2>HTML + CSS + JavaScript</h2>
+
+<p>
+These three technologies work together to create
+modern websites.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+
+<!-- HTML -->
+
+<div class="card">
+
+<div class="icon">🧱</div>
+
+<h3>HTML</h3>
+
+<p>
+HTML creates the structure and content of a website.
+</p>
+
+<ul>
+<li>Headings</li>
+<li>Paragraphs</li>
+<li>Images</li>
+<li>Buttons</li>
+<li>Links</li>
+</ul>
+
+<div class="example">
+
+<div class="example-head">
+
+HTML Example
+
+<button class="copy"
+onclick="copyCode(this,'htmlCode')">
+Copy
+</button>
+
+</div>
+
+<pre id="htmlCode">&lt;h1&gt;My Website&lt;/h1&gt;
+&lt;p&gt;Welcome!&lt;/p&gt;
+&lt;button&gt;Click Me&lt;/button&gt;</pre>
+
+</div>
+
+</div>
+
+
+<!-- CSS -->
+
+<div class="card">
+
+<div class="icon">🎨</div>
+
+<h3>CSS</h3>
+
+<p>
+CSS controls the design and appearance of your website.
+</p>
+
+<ul>
+<li>Colors</li>
+<li>Fonts</li>
+<li>Spacing</li>
+<li>Animations</li>
+<li>Layouts</li>
+</ul>
+
+<div class="example">
+
+<div class="example-head">
+
+CSS Example
+
+<button class="copy"
+onclick="copyCode(this,'cssCode')">
+Copy
+</button>
+
+</div>
+
+<pre id="cssCode">body {
+    background:#07111f;
+    color:white;
+}
+
+button {
+    padding:12px;
+}</pre>
+
+</div>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<div class="card">
+
+<div class="icon">⚡</div>
+
+<h3>JavaScript</h3>
+
+<p>
+JavaScript adds interaction and functionality.
+</p>
+
+<ul>
+<li>Buttons</li>
+<li>Menus</li>
+<li>Games</li>
+<li>Calculators</li>
+<li>Animations</li>
+</ul>
+
+<div class="example">
+
+<div class="example-head">
+
+JavaScript Example
+
+<button class="copy"
+onclick="copyCode(this,'jsCode')">
+Copy
+</button>
+
+</div>
+
+<pre id="jsCode">function hello(){
+    alert("Hello World!");
+}</pre>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     HOW THEY WORK
+========================= -->
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+
+<small>UNDERSTAND THE BASICS</small>
+
+<h2>How They Work Together</h2>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+
+<div class="icon">🧱</div>
+
+<h3>HTML = Structure</h3>
+
+<p>
+HTML is the structure of your website.
+Think of it as the walls and rooms of a house.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🎨</div>
+
+<h3>CSS = Design</h3>
+
+<p>
+CSS makes your website beautiful.
+Think of it as paint and decoration.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">⚙️</div>
+
+<h3>JavaScript = Actions</h3>
+
+<p>
+JavaScript makes your website interactive.
+It controls what happens when users click or interact.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     SAVE WEBSITE
+========================= -->
+
+<section id="save">
+
+<div class="container">
+
+<div class="section-title">
+
+<small>STEP BY STEP</small>
+
+<h2>How to Save Your Website</h2>
+
+<p>
+Follow these simple steps.
+</p>
+
+</div>
+
+
+<div class="steps">
+
+
+<div class="step">
+
+<div class="number">1</div>
+
+<h3>Open an Editor</h3>
+
+<p>
+Open VS Code, Notepad or another code editor.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="number">2</div>
+
+<h3>Create a Folder</h3>
+
+<p>
+Create one folder for your website.
+</p>
+
+<div class="example">
+
+<pre>MyWebsite</pre>
+
+</div>
+
+</div>
+
+
+<div class="step">
+
+<div class="number">3</div>
+
+<h3>Create Your Files</h3>
+
+<p>
+Create your HTML, CSS and JavaScript files.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="number">4</div>
+
+<h3>Open index.html</h3>
+
+<p>
+Save everything and open
+<b>index.html</b> in your browser.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     VERY IMPORTANT FILE GUIDE
+========================= -->
+
+<section id="files">
+
+<div class="container">
+
+<div class="section-title">
+
+<small>⭐ VERY IMPORTANT</small>
+
+<h2>How to Put HTML, CSS & JS in One Folder</h2>
+
+<p>
+Keep the three files together so they can work correctly.
+</p>
+
+</div>
+
+
+<div class="file-box">
+
+
+<div class="card">
+
+<h3>📁 Step 1 — Create One Folder</h3>
+
+<p>
+Create a folder and give it any name.
+For example:
+</p>
+
+<div class="example">
+
+<pre>MyWebsite</pre>
+
+</div>
+
+
+<h3 style="margin-top:25px;">
+📄 Step 2 — Put 3 Files Inside
+</h3>
+
+<div class="example">
+
+<pre>MyWebsite/
+│
+├── index.html
+├── style.css
+└── script.js</pre>
+
+</div>
+
+
+<div class="file-highlight">
+
+<strong>⭐ Remember:</strong>
+
+<p style="margin-top:7px;color:var(--muted);">
+
+All three files should be inside the
+<b>same folder</b>.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="connection">
+
+
+<!-- CSS CONNECTION -->
+
+<div class="card">
+
+<h3>🎨 Connect CSS</h3>
+
+<p>
+Put this inside the
+<b>&lt;head&gt;</b> of index.html:
+</p>
+
+<div class="example">
+
+<div class="example-head">
+
+index.html
+
+<button class="copy"
+onclick="copyCode(this,'cssLink')">
+Copy
+</button>
+
+</div>
+
+<pre id="cssLink">&lt;link rel="stylesheet"
+href="style.css"&gt;</pre>
+
+</div>
+
+</div>
+
+
+<!-- JS CONNECTION -->
+
+<div class="card">
+
+<h3>⚡ Connect JavaScript</h3>
+
+<p>
+Put this before
+<b>&lt;/body&gt;</b>:
+</p>
+
+<div class="example">
+
+<div class="example-head">
+
+index.html
+
+<button class="copy"
+onclick="copyCode(this,'jsLink')">
+Copy
+</button>
+
+</div>
+
+<pre id="jsLink">&lt;script src="script.js"&gt;
+&lt;/script&gt;</pre>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:20px;">
+
+<h3>⭐ The Easy Formula</h3>
+
+<div class="example">
+
+<pre>🟧 HTML
+    ↓
+Structure
+
+🎨 CSS
+    ↓
+Design
+
+⚡ JavaScript
+    ↓
+Functionality</pre>
+
+</div>
+
+<p style="margin-top:15px;">
+<b>index.html</b> is normally the main page that
+connects the CSS and JavaScript files.
+</p>
+
+</div>
+
+
+<div class="card" style="margin-top:20px;">
+
+<h3>⚠️ Important File Names</h3>
+
+<p>
+Use these names exactly:
+</p>
+
+<div class="example">
+
+<pre>index.html
+style.css
+script.js</pre>
+
+</div>
+
+<p style="margin-top:12px;color:#ff9e9e;">
+Do not accidentally save them as
+index.html.txt or style.css.txt.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CHATGPT PROMPTS
+========================= -->
+
+<section id="prompts">
+
+<div class="container">
+
+<div class="section-title">
+
+<small>USE AI SMARTLY</small>
+
+<h2>Professional ChatGPT Prompts</h2>
+
+<p>
+Good instructions help ChatGPT understand exactly what
+you want.
+</p>
+
+</div>
+
+
+<div class="search-box">
+
+<input
+class="search"
+id="search"
+oninput="searchPrompts()"
+placeholder="Search prompts...">
+
+</div>
+
+
+<div class="prompt-list">
+
+
+<div class="prompt-card">
+
+<div class="prompt-top">
+
+<h3>🌐 Professional Website</h3>
+
+<button class="copy"
+onclick="copyPrompt(this)">
+Copy
+</button>
+
+</div>
+
+<div class="prompt-text">
+
+Act as a senior web developer and UI/UX designer.
+Create a professional, modern and responsive website
+about [TOPIC]. Use HTML, CSS and JavaScript.
+Add smooth animations, beautiful cards, navigation,
+buttons, hover effects and a professional color scheme.
+Make it mobile friendly and bug-free.
+
+</div>
+
+</div>
+
+
+<div class="prompt-card">
+
+<div class="prompt-top">
+
+<h3>🎨 Improve Design</h3>
+
+<button class="copy"
+onclick="copyPrompt(this)">
+Copy
+</button>
+
+</div>
+
+<div class="prompt-text">
+
+Improve the UI/UX of this website.
+Make it modern, professional and visually attractive.
+Improve spacing, typography, colors, buttons, cards,
+animations and responsive design.
+Do not remove existing features.
+
+</div>
+
+</div>
+
+
+<div class="prompt-card">
+
+<div class="prompt-top">
+
+<h3>🐛 Fix Bugs</h3>
+
+<button class="copy"
+onclick="copyPrompt(this)">
+Copy
+</button>
+
+</div>
+
+<div class="prompt-text">
+
+Act as a senior JavaScript developer.
+Find and fix all bugs in this code.
+Check HTML, CSS, JavaScript, buttons,
+event listeners, mobile responsiveness and
+console errors.
+Keep all existing features.
+
+</div>
+
+</div>
+
+
+<div class="prompt-card">
+
+<div class="prompt-top">
+
+<h3>📱 Make Responsive</h3>
+
+<button class="copy"
+onclick="copyPrompt(this)">
+Copy
+</button>
+
+</div>
+
+<div class="prompt-text">
+
+Make this website fully responsive for desktop,
+tablet and mobile.
+Do not remove any features.
+Fix navigation, buttons, cards, text sizes
+and spacing on small screens.
+
+</div>
+
+</div>
+
+
+<div class="prompt-card">
+
+<div class="prompt-top">
+
+<h3>📦 Merge Files</h3>
+
+<button class="copy"
+onclick="copyPrompt(this)">
+Copy
+</button>
+
+</div>
+
+<div class="prompt-text">
+
+Merge the HTML, CSS and JavaScript into one complete
+index.html file.
+Do not remove any functionality.
+Make sure all buttons and interactions work.
+Return the complete code.
+
+</div>
+
+</div>
+
+
+<div class="prompt-card">
+
+<div class="prompt-top">
+
+<h3>➕ Add a Feature</h3>
+
+<button class="copy"
+onclick="copyPrompt(this)">
+Copy
+</button>
+
+</div>
+
+<div class="prompt-text">
+
+Add [FEATURE] to my existing website.
+Do not change anything else.
+Keep the current design and all existing functionality.
+Return the complete updated code.
+
+</div>
+
+</div>
+
+
+<div class="prompt-card">
+
+<div class="prompt-top">
+
+<h3>✨ Final Professional Polish</h3>
+
+<button class="copy"
+onclick="copyPrompt(this)">
+Copy
+</button>
+
+</div>
+
+<div class="prompt-text">
+
+Give this website a professional final polish.
+Improve UI/UX, typography, spacing, animations,
+responsiveness and visual hierarchy.
+Make it look like a professional production website.
+Preserve all existing functionality.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     SLIDE SECTION
+========================= -->
+
+<section id="slides">
+
+<div class="container">
+
+<div class="section-title">
+
+<small>AI PRESENTATIONS</small>
+
+<h2>Prompts for Professional Slides</h2>
+
+<p>
+Use ChatGPT to plan presentations and even create
+interactive slide websites.
+</p>
+
+</div>
+
+
+<div class="slide-area">
+
+
+<div class="slide active">
+
+<div>
+
+<div style="font-size:55px;">
+🎤
+</div>
+
+<h3>Professional Presentation</h3>
+
+<p>
+Create a clear introduction, main points,
+examples and a strong conclusion.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<div>
+
+<div style="font-size:55px;">
+🧠
+</div>
+
+<h3>Educational Slides</h3>
+
+<p>
+Use simple language, short points, examples
+and useful visuals.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<div>
+
+<div style="font-size:55px;">
+💻
+</div>
+
+<h3>HTML Slide Website</h3>
+
+<p>
+Ask ChatGPT to turn your presentation into
+an interactive HTML slide website.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<div>
+
+<div style="font-size:55px;">
+✨
+</div>
+
+<h3>Professional Design</h3>
+
+<p>
+Ask for consistent colors, typography,
+spacing, icons and animations.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<div>
+
+<div style="font-size:55px;">
+🚀
+</div>
+
+<h3>Final Presentation</h3>
+
+<p>
+Keep slides simple, clear and focused on
+one important idea at a time.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="slide-controls">
+
+<button class="btn secondary"
+onclick="previousSlide()">
+← Previous
+</button>
+
+<span class="slide-number"
+id="slideNumber">
+1 / 5
+</span>
+
+<button class="btn primary"
+onclick="nextSlide()">
+Next →
+</button>
+
+</div>
+
+
+<div class="card" style="margin-top:30px;">
+
+<h3>📋 Best Slide Prompt</h3>
+
+<div class="example">
+
+<div class="example-head">
+
+Copy Prompt
+
+<button class="copy"
+onclick="copyCode(this,'slidePrompt')">
+Copy
+</button>
+
+</div>
+
+<pre id="slidePrompt">Act as a professional presentation designer.
+
+Create a complete presentation about [TOPIC].
+
+Requirements:
+
+- Create 8–10 slides
+- Give every slide a clear title
+- Use short and easy points
+- Add examples
+- Create a strong introduction
+- Explain the main topic clearly
+- Add a conclusion
+- Suggest visuals for each slide
+- Use a modern professional design
+- Use consistent colors and typography
+- Do not overcrowd slides
+- Make it suitable for [GRADE/AUDIENCE]
+
+If creating it as a website,
+use HTML, CSS and JavaScript.
+Add Next and Previous buttons
+and smooth slide animations.</pre>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CHEAT SHEET
+========================= -->
+
+<section id="cheatsheet">
+
+<div class="container">
+
+<div class="section-title">
+
+<small>QUICK REFERENCE</small>
+
+<h2>Important Cheat Sheet</h2>
+
+</div>
+
+
+<div class="cheat">
+
+
+<div class="cheat-box">
+
+<h3>🧱 HTML</h3>
+
+<div class="command">
+&lt;h1&gt;Title&lt;/h1&gt;
+<span>Heading</span>
+</div>
+
+<div class="command">
+&lt;p&gt;Text&lt;/p&gt;
+<span>Paragraph</span>
+</div>
+
+<div class="command">
+&lt;img&gt;
+<span>Image</span>
+</div>
+
+<div class="command">
+&lt;a&gt;
+<span>Link</span>
+</div>
+
+<div class="command">
+&lt;button&gt;
+<span>Button</span>
+</div>
+
+</div>
+
+
+<div class="cheat-box">
+
+<h3>🎨 CSS</h3>
+
+<div class="command">
+color
+<span>Text color</span>
+</div>
+
+<div class="command">
+background
+<span>Background</span>
+</div>
+
+<div class="command">
+padding
+<span>Inside spacing</span>
+</div>
+
+<div class="command">
+margin
+<span>Outside spacing</span>
+</div>
+
+<div class="command">
+border-radius
+<span>Rounded corners</span>
+</div>
+
+</div>
+
+
+<div class="cheat-box">
+
+<h3>⚡ JavaScript</h3>
+
+<div class="command">
+alert()
+<span>Message</span>
+</div>
+
+<div class="command">
+console.log()
+<span>Console</span>
+</div>
+
+<div class="command">
+function
+<span>Function</span>
+</div>
+
+<div class="command">
+addEventListener()
+<span>Interaction</span>
+</div>
+
+</div>
+
+
+<div class="cheat-box">
+
+<h3>🤖 ChatGPT</h3>
+
+<div class="command">
+"Act as a senior developer"
+<span>Expert</span>
+</div>
+
+<div class="command">
+"Make it responsive"
+<span>Mobile</span>
+</div>
+
+<div class="command">
+"Fix all bugs"
+<span>Debug</span>
+</div>
+
+<div class="command">
+"Keep existing features"
+<span>Preserve</span>
+</div>
+
+<div class="command">
+"Return complete code"
+<span>Full code</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<div class="container">
+
+<strong>WebCraft Academy</strong>
+
+<p>
+HTML • CSS • JavaScript • ChatGPT • Web Design
+</p>
+
+<p style="margin-top:8px;">
+Learn → Build → Improve → Create
+</p>
+
+</div>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+function toggleMenu(){
+
+    const menu =
+        document.getElementById("navLinks");
+
+    menu.classList.toggle("show");
+
+}
+
+
+/* =========================
+   COPY CODE
+========================= */
+
+function copyCode(button,id){
+
+    const element =
+        document.getElementById(id);
+
+    copyText(button,element.innerText);
+
+}
+
+
+/* =========================
+   COPY TEXT
+========================= */
+
+function copyText(button,text){
+
+    navigator.clipboard.writeText(text)
+    .then(function(){
+
+        const oldText =
+            button.innerText;
+
+        button.innerText = "Copied!";
+
+        setTimeout(function(){
+
+            button.innerText = oldText;
+
+        },1500);
+
+    })
+    .catch(function(){
+
+        alert("Copy failed. Please copy manually.");
+
+    });
+
+}
+
+
+/* =========================
+   COPY PROMPT
+========================= */
+
+function copyPrompt(button){
+
+    const card =
+        button.closest(".prompt-card");
+
+    const text =
+        card.querySelector(".prompt-text").innerText;
+
+    copyText(button,text);
+
+}
+
+
+/* =========================
+   SEARCH PROMPTS
+========================= */
+
+function searchPrompts(){
+
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    const prompts =
+        document.querySelectorAll(".prompt-card");
+
+    prompts.forEach(function(card){
+
+        const text =
+            card.innerText.toLowerCase();
+
+        if(text.includes(search)){
+
+            card.style.display = "block";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* =========================
+   SLIDES
+========================= */
+
+let currentSlide = 0;
+
+const slides =
+    document.querySelectorAll(".slide");
+
+
+function showSlide(){
+
+    slides.forEach(function(slide){
+
+        slide.classList.remove("active");
+
+    });
+
+    slides[currentSlide].classList.add("active");
+
+    document.getElementById("slideNumber")
+    .innerText =
+        (currentSlide + 1) +
+        " / " +
+        slides.length;
+
+}
+
+
+function nextSlide(){
+
+    currentSlide++;
+
+    if(currentSlide >= slides.length){
+
+        currentSlide = 0;
+
+    }
+
+    showSlide();
+
+}
+
+
+function previousSlide(){
+
+    currentSlide--;
+
+    if(currentSlide < 0){
+
+        currentSlide =
+            slides.length - 1;
+
+    }
+
+    showSlide();
+
+}
+
+
+/* =========================
+   KEYBOARD SLIDES
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "ArrowRight"){
+
+            nextSlide();
+
+        }
+
+        if(event.key === "ArrowLeft"){
+
+            previousSlide();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   CLOSE MOBILE MENU
+========================= */
+
+document.querySelectorAll(".nav-links a")
+.forEach(function(link){
+
+    link.addEventListener(
+        "click",
+        function(){
+
+            document
+            .getElementById("navLinks")
+            .classList.remove("show");
+
+        }
+    );
+
+});
+
+</script>
+
+</body>
+</html>
